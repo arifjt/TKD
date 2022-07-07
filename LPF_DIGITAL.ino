@@ -13,27 +13,28 @@ float AktualTemp_1;
 float tempSet;
 float Awal;
 float tempC1;
-float sensorSuhu = A0;   //sensor suhu LM35
-int Ts= 10;            //10 mS
+float sensorSuhu = A0;                  //sensor suhu IC LM35
+int Ts= 10;                             //T sampling 10 mS
 void setup()
-{ Serial.begin(9600);                       //set baud rate 9600 bps
+{ Serial.begin(9600);                   
   pinMode(sensorSuhu, INPUT);
-  TCCR2B=(TCCR2B&0xF8) | 2;                 //set PWM frequency to 3906 Hz for pin 3 (and 11)
-  float Awal = analogRead(sensorSuhu);         // pancingan awal menyesuaikan suhu awal
-  AktualTemp_1 = (5.0 * Awal * 100)/1024;   // konversi teg analog ke suhu Celcius
+  float Awal = analogRead(sensorSuhu);  // suhu awal 
+  AktualTemp_1 = (5.0*Awal*100)/1024;   // konversi teg analog ke suhu Celcius
+  Serial.println("Suhu Suhu_LPF");
 }
 void loop()
 {       
-    float baca = analogRead(sensorSuhu);      // baca data dari sensor 
-    tempC1 = (5.0 * baca * 100)/1024;      // konversi teg analog ke suhu
+    float Baca = analogRead(sensorSuhu); // baca data dari sensor 
+    tempC1 = (5.0*Baca*100)/1024;        // konversi teg analog ke suhu
     
-    //=========ini LPF DIGITAL ========================
-    AktualTemp=(0.97 * AktualTemp_1) + (0.03 * tempC1);
-    //=========ini  END LPF============================
+    //=========ini LPF DIGITAL ==================
+    AktualTemp=(0.97*AktualTemp_1)+(0.03*tempC1);
+    //=========ini  END LPF======================
          
     Serial.print(tempC1,1);             //plotter-1
-    Serial.print(" ");               //chr jeda   
-    Serial.println(AktualTemp,1);    //plotter-2
+    Serial.print(" ");                  //chr jeda   
+    Serial.print(AktualTemp,1);         //plotter-2
+    Serial.println(" ");
     AktualTemp_1=AktualTemp;
     delay(Ts); 
 }
