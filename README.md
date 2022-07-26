@@ -16,3 +16,8 @@ SENSOR SUHU IC LM35 DAN ARDUINO
 ![RANGKAIAN_ARDUINO_IC_LM35](https://user-images.githubusercontent.com/73786260/177790150-e25d5ede-d63d-42b3-ac62-47f424f172ba.png)
 
 UNTUK VIDEONYA ADA DI SINI https://youtu.be/qyxed5LIp6g
+
+
+
+
+untuk demo Fading.ino ada di Demo ada di https://youtu.be/-zfrnw4Iwpg
